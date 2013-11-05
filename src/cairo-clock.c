@@ -452,7 +452,12 @@ render (gint iWidth,
 	g_iHours = g_pTime->tm_hour;
 
 	if (!bAnimateMinute)
+	{
 		fAngleMinute = (double) g_iMinutes * 6.0f;
+		
+		if (g_iUpsideDown)
+			fAngleMinute -= 180;
+	}
 
 	if (!g_i24)
 	{
@@ -468,9 +473,7 @@ render (gint iWidth,
 			      86400.0f;
 	
 	if (g_iUpsideDown)
-	{
 		fAngleHour -= 180;
-	}
 
 	g_iDay = g_pTime->tm_mday;
 	g_iMonth = g_pTime->tm_mon + 1;
@@ -527,6 +530,9 @@ render (gint iWidth,
 		{
 			bAnimateMinute = FALSE;
 			fAngleMinute = (double) g_iMinutes * 6.0f;
+			
+			if (g_iUpsideDown)
+				fAngleMinute -= 180;
 		}
 	}
 	else
@@ -569,6 +575,9 @@ render (gint iWidth,
 		{
 			bAnimateMinute = FALSE;
 			fAngleMinute = (double) g_iMinutes * 6.0f;
+			
+			if (g_iUpsideDown)
+				fAngleMinute -= 180;
 		}
 	}
 	else
@@ -614,6 +623,9 @@ render (gint iWidth,
 		fLastFullSecond = fCurrentTimeStamp;
 
 		fAngleSecond = (double) g_iSeconds * 6.0f;
+
+		if (g_iUpsideDown)
+			fAngleSecond -= 180;
 
 		if (fAngleSecond == 360.0f)
 			fAngleSecond = 0.0f;
