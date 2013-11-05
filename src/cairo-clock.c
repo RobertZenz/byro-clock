@@ -129,6 +129,7 @@ static time_t	  g_timeOfDay;
 struct tm*	  g_pTime;
 gint		  g_i12			 = 0;	/* 12h hour-hand toggle       */
 gint		  g_i24			 = 0;	/* 24h hour-hand toggle       */
+gint		  g_iUpsideDown  = 0;	/* 0/12/24 is at the bottom     */
 gint		  g_iShowDate		 = 0;	/* date-display toggle        */
 gint		  g_iShowSeconds	 = 0;	/* seconds-hand toggle        */
 gint		  g_iDefaultX		 = -1;	/* x-pos of top-left corner   */
@@ -465,6 +466,11 @@ render (gint iWidth,
 		fAngleHour = (g_iSeconds + 60 * g_iMinutes + 3600 * g_iHours) *
 			      360.0 /
 			      86400.0f;
+	
+	if (g_iUpsideDown)
+	{
+		fAngleHour -= 180;
+	}
 
 	g_iDay = g_pTime->tm_mday;
 	g_iMonth = g_pTime->tm_mon + 1;
@@ -802,6 +808,16 @@ on_24h_toggled (GtkToggleButton* pTogglebutton,
 		g_i24 = 1;
 	else
 		g_i24 = 0;
+}
+
+static void
+on_upsidedown_toggled (GtkToggleButton* pTogglebutton,
+		gpointer	 window)
+{
+	if (gtk_toggle_button_get_active (pTogglebutton))
+		g_iUpsideDown = 1;
+	else
+		g_iUpsideDown = 0;
 }
 
 static void
@@ -1304,6 +1320,7 @@ main (int    argc,
 	GtkWidget*	     pCheckButtonAppearInTaskbar = NULL;
 	GtkWidget*	     pCheckButtonSticky		 = NULL;
 	GtkWidget*	     pCheckButton24h		 = NULL;
+	GtkWidget*	     pCheckButtonUpsideDown	 = NULL;
 	GtkWidget*	     pButtonHelp		 = NULL;
 	GtkWidget*	     pButtonClose		 = NULL;
 	GList*		     pThemeEntry		 = NULL;
@@ -1565,6 +1582,8 @@ main (int    argc,
 						   "checkbuttonSticky");
 	pCheckButton24h = glade_xml_get_widget (pGladeXml,
 						"checkbutton24h");
+	pCheckButtonUpsideDown = glade_xml_get_widget (pGladeXml,
+						"checkbuttonUpsideDown");
 	pButtonHelp = glade_xml_get_widget (pGladeXml,
 					    "buttonHelp");
 	pButtonClose = glade_xml_get_widget (pGladeXml,
@@ -1584,6 +1603,8 @@ main (int    argc,
 				      g_iSticky);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pCheckButton24h),
 				      g_i24);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pCheckButtonUpsideDown),
+				      g_iUpsideDown);
 
 	pThemeEntry = g_list_first (g_pThemeList);
 	while (pThemeEntry)
@@ -1741,6 +1762,10 @@ main (int    argc,
 	g_signal_connect (G_OBJECT (pCheckButton24h),
 			  "toggled",
 			  G_CALLBACK (on_24h_toggled),
+			  g_pMainWindow);
+	g_signal_connect (G_OBJECT (pCheckButtonUpsideDown),
+			  "toggled",
+			  G_CALLBACK (on_upsidedown_toggled),
 			  g_pMainWindow);
 	g_signal_connect (G_OBJECT (pButtonHelp),
 			  "clicked",
