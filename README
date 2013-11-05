@@ -8,3 +8,17 @@ project-homepage located at:
 
 	http://macslow.thepimp.net/cairo-clock
 
+
+---
+
+This is forked of the Launchpad code:
+
+    https://launchpad.net/ubuntu/+source/cairo-clock
+    
+---
+
+Changes so far:
+
+ * Applied the XShape path from launchpad
+ * New upside-down setting
+
