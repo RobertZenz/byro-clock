@@ -1,0 +1,52 @@
+This package was debianized by Mirco Müller <macslow@bangang.de> on
+Sat,  1 Apr 2006 20:45:10 +0100.
+
+It was downloaded from http://macslow.thepimp.net/?page_id=23
+
+Upstream authors: (contents of file "AUTHORS")
+
+   idea/code/deb/themes (unless otherwise noted):
+   Mirco "MacSlow" Mueller <macslow@bangang.de>
+   
+   autotool/make/conf/rpm love:
+   Milosz "deadchip" Derezynski <internalerror@gmail.com>
+   
+   gentoo-packagingo:
+   Alex “Ninpo” Boag-Munroe <alex@smartasolutions.com>
+   
+   antique-theme:
+   Timo Sakari Mikkolainen <tmikkola@gmail.com>
+   
+   tango-theme:
+   Jannol <jp@jannol.com>
+   
+   default-24/ipulse/ipulse-24/quartz-24/radium-24/silvia/silvia-24/simple-24:
+   Darryll "Moppsy" Truchan <moppsy@comcast.net>
+
+Copyright:
+
+   Copyright (C) 2006 Mirco Müller <macslow@bangang.de>
+
+License:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 of the License.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License version 2 can be found in `/usr/share/common-licenses/GPL-2'.
+
+The Debian packaging is
+Copyright (C) 2006, Mirco Müller <macslow@bangang.de>
+Copyright (C) 2007-2009, Bart Martens <bartm@knars.be>
+and is licensed under the GPL version 2, see above.
+

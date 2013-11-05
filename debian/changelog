@@ -1,0 +1,121 @@
+cairo-clock (0.3.4-2ubuntu2) precise; urgency=low
+
+  * Drop the Hildon and UME changes as UME is dead.
+    The package can be sync on next occasion.
+
+ -- Michael Bienia <geser@ubuntu.com>  Fri, 06 Apr 2012 13:17:05 +0200
+
+cairo-clock (0.3.4-2ubuntu1) oneiric; urgency=low
+
+  * Merge from Debian (LP: #765949), remaining changes:
+    - Split out hildonization modifications to cairo-clock-hildon
+    - Added hildon as a general build-dependency
+
+ -- Ilya Barygin <barygin@gmail.com>  Sat, 03 Sep 2011 21:10:04 +0400
+
+cairo-clock (0.3.4-2) unstable; urgency=low
+
+  * debian/patches/04_624922.diff: Added.  Closes: #624922.
+
+ -- Bart Martens <bartm@debian.org>  Sun, 21 Aug 2011 09:42:46 +0000
+
+cairo-clock (0.3.4-1ubuntu1) karmic; urgency=low
+
+  * Merge from Debian, remaining Ubuntu chages:
+    - Split out hildonization modifications to cario-clock-hildon
+    - Added hildon as a general build-dependency
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Tue, 28 Apr 2009 15:50:43 -0400
+
+cairo-clock (0.3.4-1) unstable; urgency=low
+
+  * New upstream release.  Closes: #501766.
+  * debian/control: Moved compiz to Suggests.  Closes: #485639.
+  * debian/watch: Updated.
+
+ -- Bart Martens <bartm@debian.org>  Tue, 06 Jan 2009 20:14:02 +0100
+
+cairo-clock (0.3.3-2ubuntu2) jaunty; urgency=low
+
+  * Corrected autoconfigure rules to make --enable-hildon work properly
+  * Split out hildonization modifications to cario-clock-hildon
+  * Changed build-deps to make hildon a general dependency vs. lpia specific
+  * Corrected installation of the UME glade layout for cairo-clock-hildon
+
+ -- Michael Casadevall <sonicmctails@gmail.com>  Sun, 16 Nov 2008 05:14:23 -0500
+
+cairo-clock (0.3.3-2ubuntu1) intrepid; urgency=low
+
+  [Adilson Oliveira]
+  * Changed interface to fit in smaller windows and removed
+    unused options for UME with --enable-hildon flag.
+
+  [Steve Kowalik]
+  * Update the re-autoconf patch, splitting the configure.ac changes into its
+    own patch, and use the same version of automake.
+  * Update the Maintainer field as per spec.
+  * Add 04_ume_onlyshowin.diff to add OnlyShowIn to the .desktop file.
+
+  [Emmet Hikory]
+  * Rebase .desktop and .desktop.in patches to apply cleanly, despite
+    the .desktop not being generated from .desktop.in at build-time.
+
+ -- Emmet Hikory <persia@ubuntu.com>  Thu, 19 Jun 2008 17:00:51 +0900
+
+cairo-clock (0.3.3-2) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/01_aboutclosebutton.diff: Removed.  Is solved in new
+    upstream release.
+  * debian/control: Updated package versions in Build-Depends and added
+    libxml-parser-perl to Build-Depends.
+  * debian/menu: Updated longtitle and section.  Closes: #445158.
+  * debian/patches/02_desktop_categories.diff: Added.  Updates the Categories
+    field in the .desktop file.
+  * debian/patches/03_composited.diff: Added.  Allows using this program
+    without "composited desktop".
+  * debian/rules: Re-compress manpage.
+
+ -- Bart Martens <bartm@debian.org>  Sat, 13 Oct 2007 16:12:31 +0200
+
+cairo-clock (0.3.3-1) experimental; urgency=low
+
+  * localized for da, de, en_GB, es, fi, fr, it, nl, pl, pt_PT, ru, sl, sv, tr, zh_CN and zh_TW
+  * using GOption, GList and GString for theme-list handling 
+  * checking for a composited desktop-environment, thus depending on gtk+ >= 2.10.0
+  * brand new gremlin/gremlin-24 theme included (courtesy of Christian
+    "ChipX86" Hammond)
+  * smooth hand animations
+  * no more flashing of backgrond-clear-color upon startup
+  * close button in about-dialog works now/again
+  * work-around for "white rectangle"-bug in Xorg (#11109)
+
+ -- Mirco Müller <macslow@bangang.de>  Sun,  19 Aug 2007 09:39:19 +0100
+
+cairo-clock (0.3.2-3) unstable; urgency=low
+
+  * debian/patches/01_aboutclosebutton.diff: Added.
+  * debian/control: Removed xcompmgr from Recommends.
+
+ -- Bart Martens <bartm@knars.be>  Sat, 02 Jun 2007 08:17:12 +0200
+
+cairo-clock (0.3.2-2) unstable; urgency=low
+
+  * Initial release in Debian.  Closes: #423554.
+  * debian/*: Repackaged with cdbs.
+  * debian/menu: Added.
+  * debian/control, debian/rules, debian/install: Use imagemagick to convert
+    the icon from .png to .xpm for use in debian/menu.
+  * debian/copyright: Updated.
+  * debian/watch: Added.
+
+ -- Bart Martens <bartm@knars.be>  Sat, 12 May 2007 19:15:00 +0200
+
+cairo-clock (0.3.2-1) experimental; urgency=low
+
+  * added new themes
+  * added and fixed patch for 24h-mode supplied by Darryll
+  * fixed some of my own themes
+
+ -- Mirco Müller <macslow@bangang.de>  Sat,  1 Apr 2006 20:45:10 +0100
+

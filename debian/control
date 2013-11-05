@@ -1,0 +1,19 @@
+Source: cairo-clock
+Section: x11
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Bart Martens <bartm@debian.org>
+Build-Depends: cdbs, debhelper (>= 5), autotools-dev, libgtk2.0-dev (>= 2.10.0), libcairo2-dev (>= 1.2.0), libglade2-dev (>= 2.6.0), librsvg2-dev (>= 2.14.0), imagemagick, libxml-parser-perl
+Standards-Version: 3.9.2
+Homepage: http://macslow.thepimp.net/index.php?page_id=23
+
+Package: cairo-clock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: x11-common (>= 7.0.0)
+Suggests: compiz
+Description: Analog clock drawn with vector-graphics
+ It is an analog clock displaying the system-time. It leverages the new visual
+ features offered by Xorg 7.0 in combination with a compositing-manager (e.g.
+ like xcompmgr or compiz), GTK+ 2.10.0, cairo 1.2.0, libglade 2.6.0 and librsvg
+ 2.14.0 to produce a time display with pretty-pixels.

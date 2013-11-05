@@ -1,0 +1,4 @@
+?package(cairo-clock):needs="X11" section="Games/Toys"\
+  icon="cairo-clock.xpm"\
+  longtitle="MacSlow's Cairo-Clock - analog clock displaying the system-time"\
+  title="Cairo-Clock" command="/usr/bin/cairo-clock"
