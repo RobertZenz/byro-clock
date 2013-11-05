@@ -1603,6 +1603,7 @@ main (int    argc,
 	rsvg_handle_get_dimensions (g_pSvgHandles[CLOCK_DROP_SHADOW],
 				    &g_DimensionData);
 
+	gtk_window_set_has_resize_grip(GTK_WINDOW (g_pMainWindow), FALSE);
 	gtk_window_set_decorated (GTK_WINDOW (g_pMainWindow), FALSE);
 	gtk_window_set_resizable (GTK_WINDOW (g_pMainWindow), TRUE);
 	gtk_widget_set_app_paintable (g_pMainWindow, TRUE);
