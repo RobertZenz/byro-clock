@@ -145,7 +145,6 @@ GtkWidget*	  g_pMainWindow		 = NULL;
 GtkWidget*	  g_pPopUpMenu		 = NULL;
 GtkWidget*	  g_pSettingsDialog	 = NULL;
 GtkWidget*	  g_pInfoDialog		 = NULL;
-GtkWidget*	  g_pErrorDialog	 = NULL;
 GtkWidget*	  g_pTableStartupSize	 = NULL;
 GtkWidget*	  g_pComboBoxStartupSize = NULL;
 GtkWidget*	  g_pSpinButtonWidth	 = NULL;
@@ -283,6 +282,13 @@ time_handler (GtkWidget* pWidget)
 {
 	gtk_widget_queue_draw (pWidget);
 	return TRUE;
+}
+
+static void
+on_composited_changed(GtkWidget* pWidget,
+    gpointer user_data)
+{
+  update_input_shape(pWidget, g_iDefaultWidth, g_iDefaultHeight);
 }
 
 static gboolean
@@ -1230,9 +1236,16 @@ update_input_shape (GtkWidget* pWindow,
 		pCairoContext = gdk_cairo_create (pShapeBitmap);
 		if (cairo_status (pCairoContext) == CAIRO_STATUS_SUCCESS)
 		{
+      /*
+       * This is needed even if screen is composited to make input shape not have garbage.
+       * This garbage can be visible when screen isn't composited on e.g. theme changes.
+       */
+      cairo_save(pCairoContext);
+      cairo_set_operator(pCairoContext,CAIRO_OPERATOR_CLEAR); 
+      cairo_paint(pCairoContext);
+      cairo_restore(pCairoContext);
 			/* use drop-shadow, clock-face and marks as "clickable" areas */
 			draw_background (pCairoContext, iWidth, iHeight);
-			cairo_destroy (pCairoContext);
 #if !GTK_CHECK_VERSION(2,9,0)
 			do_shape_combine_mask (pWindow->window, NULL, 0, 0);
 			do_shape_combine_mask (pWindow->window,
@@ -1240,14 +1253,33 @@ update_input_shape (GtkWidget* pWindow,
 					       0,
 					       0);
 #else
-			gtk_widget_input_shape_combine_mask (pWindow,
-							     NULL,
-							     0,
-							     0);
-			gtk_widget_input_shape_combine_mask (pWindow,
-							     pShapeBitmap,
-							     0,
-							     0);
+      if(gdk_screen_is_composited (gtk_widget_get_screen (g_pMainWindow)))
+      {
+        gtk_widget_input_shape_combine_mask (pWindow,
+                     NULL,
+                     0,
+                     0);
+        gtk_widget_input_shape_combine_mask (pWindow,
+                     pShapeBitmap,
+                     0,
+                     0);
+
+        /*
+         * reset window shape
+         * Don't use NULL bitmap because on old GTK (e.g. 2.18.9) it doesn't really reset the mask
+         * This also appears to remove undesirable kwin's rectangular shadow on KDE4.4
+         */
+        cairo_set_source_rgb(pCairoContext,1,1,1);
+        cairo_paint(pCairoContext);
+        gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
+
+      }
+      else
+      {
+        gtk_widget_shape_combine_mask(pWindow,NULL,0,0);
+        gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
+      }
+			cairo_destroy (pCairoContext);
 #endif
 		}
 		g_object_unref ((gpointer) pShapeBitmap);
@@ -1484,18 +1516,6 @@ main (int    argc,
 
 	g_pMainWindow = glade_xml_get_widget (pGladeXml,
 					      "mainWindow");
-	g_pErrorDialog = glade_xml_get_widget (pGladeXml,
-					      "errorDialog");
-
-	if (!gdk_screen_is_composited (gtk_widget_get_screen (g_pMainWindow)))
-	{
-		gtk_window_set_icon_from_file (GTK_WINDOW (g_pErrorDialog),
-					       get_icon_filename (),
-					       NULL);
-		gtk_dialog_run (GTK_DIALOG (g_pErrorDialog));
-		exit (2);
-	}
-
 	g_pPopUpMenu = glade_xml_get_widget (pGladeXml,
 					     "popUpMenu");
 	pSettingsMenuItem = glade_xml_get_widget (pGladeXml,
@@ -1638,6 +1658,10 @@ main (int    argc,
 	 * "button-press-events" by default */
 	gtk_widget_add_events (g_pMainWindow, GDK_BUTTON_PRESS_MASK);
 
+  g_signal_connect (G_OBJECT (g_pMainWindow),
+        "composited-changed",
+        G_CALLBACK (on_composited_changed),
+        NULL);
 	g_signal_connect (G_OBJECT (g_pMainWindow),
 			  "expose-event",
 			  G_CALLBACK (on_expose),
