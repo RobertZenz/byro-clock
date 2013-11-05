@@ -22,3 +22,8 @@ Changes so far:
  * Applied the XShape path from launchpad
  * New upside-down setting
 
+---
+
+This is intended as a drop-in replacement, so it keeps the name "cairo clock",
+only this repository carries a different name.
+
