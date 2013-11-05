@@ -861,6 +861,7 @@ read_settings (gchar* pcFilePath,
 	       gint*  piAppearInTaskbar,
 	       gint*  piSticky,
 	       gint*  pi24,
+	       gint*  piUpsideDown,
 	       gint*  piRefreshRate)
 {
 	FILE* fileHandle = NULL;
@@ -889,6 +890,7 @@ read_settings (gchar* pcFilePath,
 	iResult = fscanf (fileHandle, "appear-in-taskbar=%d\n", piAppearInTaskbar);
 	iResult = fscanf (fileHandle, "sticky=%d\n", piSticky);
 	iResult = fscanf (fileHandle, "twentyfour=%d\n", pi24);
+	iResult = fscanf (fileHandle, "upsidedown=%d\n", piUpsideDown);
 	iResult = fscanf (fileHandle, "refreshrate=%d\n", piRefreshRate);
 
 	iResult = fclose (fileHandle);
@@ -910,6 +912,7 @@ write_settings (gchar* pcFilePath,
 		gint   iAppearInTaskbar,
 		gint   iSticky,
 		gint   i24,
+		gint   iUpsideDown,
 		gint   iRefreshRate)
 {
 	FILE* fileHandle = NULL;
@@ -937,6 +940,7 @@ write_settings (gchar* pcFilePath,
 	fprintf (fileHandle, "appear-in-taskbar=%d\n", iAppearInTaskbar);
 	fprintf (fileHandle, "sticky=%d\n", iSticky);
 	fprintf (fileHandle, "twentyfour=%d\n", i24);
+	fprintf (fileHandle, "upsidedown=%d\n", iUpsideDown);
 	fprintf (fileHandle, "refreshrate=%d\n", iRefreshRate);
 
 	fclose (fileHandle);
@@ -966,6 +970,7 @@ on_close_clicked (GtkButton* pButton,
 			     g_iAppearInTaskbar,
 			     g_iSticky,
 			     g_i24,
+			     g_iUpsideDown,
 			     g_iRefreshRate))
 		printf (_("Ups, there was an error while trying to save the preferences!\n"));
 
@@ -1425,6 +1430,13 @@ main (int    argc,
 					    &g_i24,
 					    _("hands work in 24 hour mode"),
 					    NULL},
+					   {"upsidedown",
+					    'f',
+					    0,
+					    G_OPTION_ARG_NONE,
+					    &g_iUpsideDown,
+					    _("0/12/24 is at the bottom"),
+					    NULL},
 					   {"refresh",
 					    'r',
 					    0,
@@ -1492,6 +1504,7 @@ main (int    argc,
 			       &g_iAppearInTaskbar,
 			       &g_iSticky,
 			       &g_i24,
+			       &g_iUpsideDown,
 			       &g_iRefreshRate);
 		if (pcFilename)
 			free (pcFilename);
@@ -1823,6 +1836,7 @@ main (int    argc,
 			     g_iAppearInTaskbar,
 			     g_iSticky,
 			     g_i24,
+			     g_iUpsideDown,
 			     g_iRefreshRate))
 		printf (_("Ups, error while trying to save the preferences!\n"));
 
