@@ -24096,7 +24096,7 @@ CLOCK_DEFINES='-DDATA_DIR="\"$(datadir)\"" -DPKGDATA_DIR="\"$(pkgdatadir)\""'
 
 CFLAGS="$CFLAGS -Wall -pedantic -std=c99 -fno-strict-aliasing -fmessage-length=0 -D_FORTIFY_SOURCE=2"
 
-ac_config_files="$ac_config_files Makefile desktop/Makefile pixmaps/Makefile glade/Makefile src/Makefile man/Makefile po/Makefile.in themes/Makefile themes/fdo/Makefile themes/simple/Makefile themes/default/Makefile themes/glassy/Makefile themes/gremlin/Makefile themes/gremlin-24/Makefile themes/zen/Makefile themes/antique/Makefile themes/radium/Makefile themes/funky/Makefile themes/default-24/Makefile themes/ipulse/Makefile themes/ipulse-24/Makefile themes/quartz-24/Makefile themes/radium-24/Makefile themes/silvia/Makefile themes/silvia-24/Makefile themes/simple-24/Makefile themes/tango/Makefile"
+ac_config_files="$ac_config_files Makefile desktop/Makefile pixmaps/Makefile glade/Makefile src/Makefile man/Makefile po/Makefile.in themes/Makefile themes/fdo/Makefile themes/simple/Makefile themes/default/Makefile themes/glassy/Makefile themes/gremlin/Makefile themes/gremlin-24/Makefile themes/zen/Makefile themes/antique/Makefile themes/radium/Makefile themes/funky/Makefile themes/default-24/Makefile themes/ipulse/Makefile themes/ipulse-24/Makefile themes/quartz-24/Makefile themes/radium-24/Makefile themes/silvia/Makefile themes/silvia-24/Makefile themes/simple-24/Makefile themes/day-night-24-upsidedown/Makefile themes/day-night-bigclock-24-upsidedown/Makefile themes/simple-day-night-24/Makefile themes/tango/Makefile"
 
 
 cat >confcache <<\_ACEOF
