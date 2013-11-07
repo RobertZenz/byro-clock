@@ -1281,38 +1281,28 @@ update_input_shape (GtkWidget* pWindow,
 			draw_background (pCairoContext, iWidth, iHeight);
 #if !GTK_CHECK_VERSION(2,9,0)
 			do_shape_combine_mask (pWindow->window, NULL, 0, 0);
-			do_shape_combine_mask (pWindow->window,
-					       pShapeBitmap,
-					       0,
-					       0);
+			do_shape_combine_mask (pWindow->window, pShapeBitmap, 0, 0);
 #else
       if(gdk_screen_is_composited (gtk_widget_get_screen (g_pMainWindow)))
       {
-        gtk_widget_input_shape_combine_mask (pWindow,
-                     NULL,
-                     0,
-                     0);
-        gtk_widget_input_shape_combine_mask (pWindow,
-                     pShapeBitmap,
-                     0,
-                     0);
+          gtk_widget_input_shape_combine_mask (pWindow, NULL, 0, 0);
+          gtk_widget_input_shape_combine_mask (pWindow, pShapeBitmap, 0, 0);
 
-        /*
-         * reset window shape
-         * Don't use NULL bitmap because on old GTK (e.g. 2.18.9) it doesn't really reset the mask
-         * This also appears to remove undesirable kwin's rectangular shadow on KDE4.4
-         */
-        cairo_set_source_rgb(pCairoContext,1,1,1);
-        cairo_paint(pCairoContext);
-        gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
-
+          /*
+           * reset window shape
+           * Don't use NULL bitmap because on old GTK (e.g. 2.18.9) it doesn't really reset the mask
+           * This also appears to remove undesirable kwin's rectangular shadow on KDE4.4
+           */
+          cairo_set_source_rgb(pCairoContext,1,1,1);
+          cairo_paint(pCairoContext);
+          gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
       }
       else
       {
-        gtk_widget_shape_combine_mask(pWindow,NULL,0,0);
-        gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
+          gtk_widget_shape_combine_mask(pWindow,NULL,0,0);
+          gtk_widget_shape_combine_mask(pWindow,pShapeBitmap,0,0);
       }
-			cairo_destroy (pCairoContext);
+      cairo_destroy (pCairoContext);
 #endif
 		}
 		g_object_unref ((gpointer) pShapeBitmap);
